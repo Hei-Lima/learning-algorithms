@@ -11,7 +11,7 @@ int bnrsch(int Arr[], int size, int Item) {
     while (Low <= High) {
         int mid = (Low + High) / 2;
         if (Arr[mid] == Item) {
-            return mid; 
+            return mid; // Retorna o índice do item
         }
         else if (Arr[mid] > Item) {
             High = mid - 1;
@@ -20,7 +20,8 @@ int bnrsch(int Arr[], int size, int Item) {
             Low = mid + 1;
         }
     }
-    return -1;
+    return -1; 
+}
 
 int main(void) {
     int Arr[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
