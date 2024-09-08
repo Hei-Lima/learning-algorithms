@@ -50,24 +50,26 @@ def dijkstra(graph, costs, parents):
         processed.append(node)
         node = find_cheaper_node(costs, processed)
 
-    return find_shortest_path(parents)
+    return find_shortest_path(costs, parents)
+
 
 def find_cheaper_node(costs, processed):
     cheaper_node = None
     cheaper_cost = float("inf")
+
     for node in costs:
         if costs[node] < cheaper_cost and node not in processed:
             cheaper_cost = costs[node]
             cheaper_node = node
     return cheaper_node
 
-def find_shortest_path(parents):
-    path = []
+
+def find_shortest_path(costs, parents):
     node = "end"
-    while node is not None:
+    path = []
+    while node != "start":
         path.append(node)
         node = parents[node]
-    path.reverse()
-    return path
+    return (path[::-1], costs["end"])
 
 print(dijkstra(graph_a, costs, parents))
