@@ -28,7 +28,7 @@ def find_smaller_end(schedule, processed):
     min_elm = None
     for aula in schedule: # class eh palavra reservada
         if aula not in processed:
-            if schedule[aula]["end"] < min and schedule[aula]["start"] > processed[-1][-1]["end"]:
+            if schedule[aula]["end"] < min and schedule[aula]["start"] > processed[-1]["end"]:
                 min =  schedule[aula]["end"]
                 min_elm = schedule[aula]
     return min_elm
