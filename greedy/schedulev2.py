@@ -26,19 +26,25 @@ schedule["music"]["end"] = 12
 def find_smaller_end(schedule, processed):
     min = float("inf")
     min_elm = None
-    for aula in schedule: # class eh palavra reservada
-        if aula not in processed:
-            if schedule[aula]["end"] < min and schedule[aula]["start"] > processed[-1]["end"]:
-                min =  schedule[aula]["end"]
+    min_name = None
+    last_end = processed[-1][list(processed[-1].keys())[0]]["end"] if processed else float("-inf")
+    
+    for aula in schedule:
+        if aula not in [list(p.keys())[0] for p in processed]:
+            if schedule[aula]["end"] < min and schedule[aula]["start"] >= last_end:
+                min = schedule[aula]["end"]
                 min_elm = schedule[aula]
                 min_name = aula
-    return {min_name: min_elm}
+    return {min_name: min_elm} if min_elm else None
 
 def find_smallest_end(schedule):
     min = float("inf")
-    for aula in schedule: # class eh palavra reservada
+    min_elm = None
+    min_name = None
+    
+    for aula in schedule:
         if schedule[aula]["end"] < min:
-            min =  schedule[aula]["end"]
+            min = schedule[aula]["end"]
             min_elm = schedule[aula]
             min_name = aula
     return {min_name: min_elm}
@@ -51,7 +57,8 @@ def greedy(schedule):
 
     while min is not None:
         min = find_smaller_end(schedule, processed)
-        processed.append(min) if min is not None else None
+        if min is not None:
+            processed.append(min)
 
     return processed
     
