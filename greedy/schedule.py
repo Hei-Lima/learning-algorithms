@@ -31,7 +31,8 @@ def find_smaller_end(schedule, processed):
             if schedule[aula]["end"] < min and schedule[aula]["start"] > processed[-1]["end"]:
                 min =  schedule[aula]["end"]
                 min_elm = schedule[aula]
-    return min_elm
+                min_name = aula
+    return {min_name: min_elm}
 
 def find_smallest_end(schedule):
     min = float("inf")
@@ -39,9 +40,10 @@ def find_smallest_end(schedule):
         if schedule[aula]["end"] < min:
             min =  schedule[aula]["end"]
             min_elm = schedule[aula]
-    return min_elm
+            min_name = aula
+    return {min_name: min_elm}
 
-def greedy(schedule):
+def greedy(schedule):   
     processed = []
     min = 0
 
